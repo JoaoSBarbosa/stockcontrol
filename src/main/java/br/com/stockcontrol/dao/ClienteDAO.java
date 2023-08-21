@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import br.com.stockcontrol.model.Cliente;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 
 @Repository
 public class ClienteDAO implements CRUD<Cliente, Long>{
@@ -22,8 +22,8 @@ public class ClienteDAO implements CRUD<Cliente, Long>{
 
 	@Override
 	public List<Cliente> lista() {
-		Query query = entityManager.createQuery("Select c from Cliente c");
-		return (List<Cliente>)query.getResultList();
+		TypedQuery<Cliente> query = entityManager.createQuery("Select c from Cliente c", Cliente.class);
+	    return query.getResultList();
 	}
 
 	@Override
